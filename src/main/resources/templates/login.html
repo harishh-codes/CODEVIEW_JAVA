@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - CODEVIEW</title>
+    <link rel="stylesheet" href="loginstyles.css"> <!-- Link to your CSS file -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="login-container">
+        <h1>Login to CODEVIEW</h1>
+        <form id="loginForm" action="/login" method="POST">
+            <div class="form-group">
+                <label for="email">Email (Gmail):</label>
+                <input type="email" id="email" name="email" required placeholder="example@gmail.com">
+                <span class="error-message" id="emailError"></span>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" class="btn">Login</button>
+        </form>
+        <div class="google-login">
+            <h3>Or</h3>
+            <button class="btn google-btn" onclick="location.href='/auth/google'">Login with Google</button>
+        </div>
+        <p>Don't have an account? <a href="/signup">Sign Up</a></p>
+    </div>
+
+    <script>
+        // Client-side Gmail validation
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            const email = document.getElementById('email').value;
+            const regex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+
+            if (!regex.test(email)) {
+                e.preventDefault();
+                document.getElementById('emailError').textContent = "Please enter a valid Gmail address.";
+            } else {
+                document.getElementById('emailError').textContent = "";
+            }
+        });
+    </script>
+</body>
+</html>

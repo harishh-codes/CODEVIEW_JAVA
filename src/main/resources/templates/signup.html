@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - CODEVIEW</title>
+    <link rel="stylesheet" href="signupstyles.css"> <!-- Link to your CSS file -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="signup-container">
+        <h1>Create Your Account</h1>
+        <form id="signupForm" action="/signup" method="POST">
+            <div class="form-group">
+                <label for="email">Email (Gmail):</label>
+                <input type="email" id="email" name="email" required placeholder="example@gmail.com">
+                <span class="error-message" id="emailError"></span>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <span class="error-message" id="passwordError"></span>
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+                <span class="error-message" id="confirmPasswordError"></span>
+            </div>
+            <button type="submit" class="btn">Sign Up</button>
+        </form>
+        <div class="google-signup">
+            <h3>Or</h3>
+            <button class="btn google-btn" onclick="location.href='/auth/google'">Sign Up with Google</button>
+        </div>
+        <p>Already have an account? <a href="/login">Login</a></p>
+    </div>
+
+    <script>
+        // Client-side validations
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+            let valid = true;
+
+            // Gmail validation
+            if (!emailRegex.test(email)) {
+                e.preventDefault();
+                document.getElementById('emailError').textContent = "Please enter a valid Gmail address.";
+                valid = false;
+            } else {
+                document.getElementById('emailError').textContent = "";
+            }
+
+            // Password validation
+            if (password.length < 6) {
+                e.preventDefault();
+                document.getElementById('passwordError').textContent = "Password must be at least 6 characters.";
+                valid = false;
+            } else {
+                document.getElementById('passwordError').textContent = "";
+            }
+
+            // Confirm password validation
+            if (password !== confirmPassword) {
+                e.preventDefault();
+                document.getElementById('confirmPasswordError').textContent = "Passwords do not match.";
+                valid = false;
+            } else {
+                document.getElementById('confirmPasswordError').textContent = "";
+            }
+        });
+    </script>
+</body>
+</html>
