@@ -24,8 +24,8 @@
                 <span class="error-message" id="passwordError"></span>
             </div>
             <div class="form-group">
-                <label for="confirmPassword">Confirm Password:</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" required>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
                 <span class="error-message" id="confirmPasswordError"></span>
             </div>
             <button type="submit" class="btn">Sign Up</button>
@@ -63,15 +63,6 @@
                 valid = false;
             } else {
                 document.getElementById('passwordError').textContent = "";
-            }
-
-            // Confirm password validation
-            if (password !== confirmPassword) {
-                e.preventDefault();
-                document.getElementById('confirmPasswordError').textContent = "Passwords do not match.";
-                valid = false;
-            } else {
-                document.getElementById('confirmPasswordError').textContent = "";
             }
         });
     </script>
